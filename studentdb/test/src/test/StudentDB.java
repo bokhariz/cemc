@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 
 public class StudentDB implements StudentDAO {
 	final static String tableName="APP.STUDENTS";
-	final static String url="jdbc:derby:C:\\Users\\Lenovo\\Documents\\cemc2015\\databases\\names;create=true";
+	final static String url="jdbc:derby:C:\\databases\\names;create=true";
 	static Connection con = null;
 	static Statement st = null;
 	static ResultSet rs = null;
