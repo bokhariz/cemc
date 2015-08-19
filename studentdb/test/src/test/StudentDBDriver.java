@@ -21,7 +21,7 @@ public class StudentDBDriver {
 		SimpleDateFormat format = new SimpleDateFormat( "yyyy/MM/dd" );
 		
 		Scanner in = new Scanner (System.in);
-		System.out.print("How many students do you really want?  ");
+		System.out.print("How many students do you realldfasdfay want?  ");
 		int numStudents= in.nextInt();
 		in.nextLine(); // clear buffer
 		
