@@ -15,8 +15,7 @@ public class StudentDB implements StudentDAO {
 		boolean wasRowInserted = false;
 		int num=0; // track if row was inserted or not
 		
-		try {
-			
+		try {		
 		con = DriverManager.getConnection(url);
 		st = con.createStatement();
 		
@@ -43,47 +42,43 @@ public class StudentDB implements StudentDAO {
 	private static java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
 	    return new java.sql.Date(date.getTime());
 	}
-	
+
 	public ArrayList<Student> findStudentLastName(String lastName) {
-		
-		ResultSet rs =null;
+
+		ResultSet rs = null;
 		int id = 0;
 		String fname = "";
 		String lname = "";
 		Calendar bdate = new GregorianCalendar();
 		Date date = null;
 		ArrayList<Student> students = new ArrayList<Student>();
-		
-		
+
 		try {
-			
-		con = DriverManager.getConnection(url);
-		st = con.createStatement();
-		 
-		PreparedStatement pstmt = con.prepareStatement("SELECT id, fname, lname,bdate from " + tableName + " where lname = ?");
-		pstmt.setString(1, lastName);
-				
-		rs = pstmt.executeQuery();
-		
-		while (rs.next()){
-			id = rs.getInt("ID");
-			fname = rs.getString("FNAME");
-			lname = rs.getString("LNAME");
-			bdate = convertSQLDateToJavaDate(rs.getDate("BDATE"));
-			Student s = new Student (id, fname, lname, bdate);
-			students.add(s);
+			con = DriverManager.getConnection(url);
+			st = con.createStatement();
+
+			PreparedStatement pstmt = con.prepareStatement("SELECT id, fname, lname,bdate from "
+							+ tableName + " where lname = ? ");
+			pstmt.setString(1, lastName);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				id = rs.getInt("ID");
+				fname = rs.getString("FNAME");
+				lname = rs.getString("LNAME");
+				bdate = convertSQLDateToJavaDate(rs.getDate("BDATE"));
+				Student s = new Student(id, fname, lname, bdate);
+				students.add(s);
+			}
+			con.close(); // close connection and resources for database
 		}
-		
-		con.close(); // close connection and resources for database
-		
-		}
-		
-		catch (SQLException se){
+
+		catch (SQLException se) {
 			System.out.println("Database Error has occurred.");
 			System.out.println(se.getMessage());
 		}
 		return students;
-		
+
 	}
 	
 	private static Calendar convertSQLDateToJavaDate(java.util.Date date) {

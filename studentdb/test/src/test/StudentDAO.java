@@ -1,10 +1,9 @@
 package test;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface StudentDAO {
 	
-	boolean insertStudent(Student student) throws SQLException;
+	boolean insertStudent(Student student);
 	ArrayList<Student> findStudentLastName(String lastName);
  
 }
